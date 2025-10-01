@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 検索エンジンやSNSシェアで表示されるページの要約文 -->
+    <meta name="description" content="ずんだもんの自己紹介ページです。趣味や学習中の技術についてまとめています。" />
+
+    <title>ずんだもん</title>
+    <link rel="icon" href="images/IMG_0466.jpeg" type="image/png" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
+
+    <!-- フォントの設定 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body id="top">
+    <nav class="global-nav">
+      <!-- id="like"と"contact"に飛ぶリンクを作成 -->
+      <a href="#like">LIKE</a>
+      <a href="#contact">CONTACT</a>
+      <a href="#top" class="back-to-top">TOP</a>
+    </nav>
+
+    <main class="container">
+      <header>
+        <h1>ずんだもん</h1>
+        <img src="images/IMG_0457.jpeg" alt="ずんだもん" />
+
+        <p>ここは私の自己紹介ページです。<br />現在JavaScriptを勉強しています。</p>
+      </header>
+
+      <section class="likes-section">
+        <h2 id="like">like</h2>
+        <div class="likes-container">
+          <div class="like-card fade-in">
+            <h3>スピンバイク</h3>
+            <p>毎日600kcal消費を目安に取り組んでいます。</p>
+          </div>
+          <div class="like-card fade-in">
+            <h3>筋トレ</h3>
+            <p>筋肉量を維持するために定期的な筋トレを行っています。</p>
+          </div>
+          <div class="like-card fade-in">
+            <h3>ごはん</h3>
+            <p>高タンパク低脂質な食事を心がけています。</p>
+          </div>
+          <div class="like-card fade-in">
+            <h3>料理</h3>
+            <p>鶏胸肉を使ったレシピが好きです。</p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <h2 id="contact">連絡先</h2>
+        <!-- action データの送り先。"#"は仮の宛先 -->
+        <!-- method データの送り方。機密情報系は全部"post"にすること。"get"にすると書いたワードがurlの末尾に表示される -->
+        <form action="#" method="post" class="contact-form">
+          <div class="form-group">
+            <!-- label そのinputが何の入力フォームなのかを示すタグ -->
+            <!-- for どのinputのためのラベルなのかを明確に関連付ける属性 -->
+            <!-- inputのid属性と必ず一致させる -->
+            <!-- name サーバーに送られる通信用の属性。後々必須になる -->
+            <label for="name">お名前</label>
+            <input type="text" id="name" name="user_name" />
+          </div>
+          <div class="form-group">
+            <label for="message">メッセージ</label>
+
+            <div class="textarea-wrapper">
+              <textarea id="message" name="user_message"></textarea>
+              <p class="char-counter" aria-live="polite">0文字</p>
+            </div>
+          </div>
+
+          <button type="submit">送信</button>
+
+          <div id="thanks-message" hidden>
+            <p>メッセージありがとうございます！</p>
+          </div>
+        </form>
+
+        <p>
+          <!-- URLを別タブで開く -->
+          <a href="https://x.com/home" target="_blank" rel="noopener noreferrer" class="btn-secondary">twitter</a>
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

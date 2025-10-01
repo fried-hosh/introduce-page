@@ -1,0 +1,409 @@
+:root {
+  /* CSS変数 */
+  /* ライトモードのカラーパレット */
+  --color-bg: #fff5ee;
+  --color-fg: #4a4a4a;
+  --color-heading: #333;
+  --color-container-bg: #fcfcfc;
+  --color-border: #d3d3d3;
+  --container-border-w: 0; /* コンテナの外枠の線の幅 */
+  --color-card-bg: #fff;
+  --color-accent: #d80909; /* aのボタン */
+  --color-accent-primary: #fff; /* ボタンの文字 */
+  --color-accent-hover: #d80909; /* ホバー時の色 */
+  --color-accent-secondary-bg: transparent;
+  --color-accent-secondary-fg: var(--color-accent);
+  --color-accent-secondary-border: var(--color-accent);
+  --color-accent-secondary-hover-bg: var(--color-accent-hover);
+  --color-accent-secondary-hover-fg: var(--color-accent-primary);
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+/* ダークモード用のスタイル */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1c1c1e;
+    --color-fg: #c7c7c7;
+    --color-heading: #f2f2f7;
+    --color-container-bg: #2c2c2e;
+    --color-border: #444;
+    --container-border-w: 1px; /* コンテナの外枠の線の幅 */
+    --color-card-bg: #3a3a3c;
+    --color-accent: #007979;
+    --color-accent-primary: #fff;
+    --color-accent-hover: #007979;
+    --color-accent-secondary-bg: transparent;
+    --color-accent-secondary-fg: var(--color-accent);
+    --color-accent-secondary-border: var(--color-accent);
+    --color-accent-secondary-hover-bg: var(--color-accent-hover);
+    --color-accent-secondary-hover-fg: var(--color-accent-primary);
+
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+html {
+  /* ページの特定の箇所に飛ぶときに画面移動がスムーズになるだけ */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Noto Sans JP", sans-serif; /* sans-serifは、Notoが読み込めなかった時の代替フォント */
+
+  /* weightは文字の太さ(100~900)。sizeは文字の大きさ */
+  /* weightはhtml側でインポートした太さしか使えない */
+  font-weight: 400;
+
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+
+  /* bodyのmargin 0はブラウザ間の表示ズレをなくすための定型文 */
+  margin: 0;
+
+  /* 中身が少ないページで余ったbodyの背景色を画面最下部まで塗る保険 */
+  min-height: 100dvh;
+  padding: 40px 20px;
+}
+
+.global-nav {
+  text-align: center;
+  padding: 15px 0;
+}
+.global-nav a {
+  font-weight: 500;
+  margin: 0 5px;
+}
+.back-to-top {
+  display: none; /* スマホ画面で中央揃えを維持するために消す */
+}
+
+.container {
+  /* ブロックの大きさを300pxに制限 */
+  max-width: 300px;
+
+  /* コンテナ自体をページの中央に配置するためのおまじない */
+  margin: 0 auto;
+
+  /* 見た目を分かりやすくするための設定 */
+  background-color: var(--color-container-bg);
+
+  /* 枠の内側を「縦40px」「横20px」空ける */
+  padding: 40px 20px;
+
+  /* 角に丸みをつける */
+  border-radius: 40px;
+
+  /* コンテナに枠線をつける */
+  border: var(--container-border-w) solid var(--color-border);
+
+  /* ボックスに影をつける */
+  /* X軸オフセット Y軸オフセット ぼかし半径 色 */
+  /* box-shadow generatorで生成するといい */
+  box-shadow: var(--shadow-sm);
+}
+
+h1 {
+  font-weight: 500;
+  text-align: center;
+  font-size: 2em; /* emは「親要素のpxに対して何倍か」を示す */
+  letter-spacing: 1px; /* 文字間隔を少し広げていい感じにする */
+  margin-bottom: 32px; /* h1の下に大きめの余白 */
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 1.5em; /* 中見出しはデフォルト(16px)の1.5倍がいい */
+  letter-spacing: 1px;
+  margin-top: 40px;
+  border-bottom: 2px solid var(--color-border); /* 2px空けて線を追加 */
+  padding-bottom: 8px;
+}
+
+p {
+  font-weight: 500;
+  line-height: 1.8; /* 行と行の間を広げて、文章を読みやすくする */
+  text-align: center;
+}
+
+img {
+  /* 幅を親要素(<div>)の100%に合わせる */
+  max-width: 100%;
+
+  /* 高さは自動で調整させる（縦横比を維持するため） */
+  height: auto;
+
+  /* 画像の下にできる余分な隙間をなくすためのおまじない */
+  display: block;
+
+  /* 画像を中央に配置 */
+  margin: auto;
+
+  /* 画像の角を少し丸くする */
+  border-radius: 50%;
+
+  margin-bottom: 32px;
+}
+
+ul {
+  /* リストの黒丸を消す */
+  list-style: none;
+  /* リストの左側の余白を調整 */
+  padding-left: 0;
+  /* liを中央揃え */
+  text-align: center;
+}
+
+li {
+  font-weight: 500;
+  /* 各リスト項目の下に少し余白 */
+  margin-bottom: 8px;
+}
+
+footer a {
+  margin-top: 20px;
+}
+
+a {
+  color: var(--color-accent-primary);
+  background-color: var(--color-accent);
+  font-weight: bold; /* boldは数値でいうと700にあたる。 */
+
+  /* リンクのデフォルト下線を消す */
+  text-decoration: none;
+
+  /* ボタンらしく見せるための調整 */
+  display: inline-block; /* paddingを有効にするため */
+  padding: 12px 14px;
+  border-radius: 40px;
+
+  /* ボタンにも影を付けて立体感を出す */
+  box-shadow: var(--shadow-sm);
+
+  /* ホバー時のアニメーションを追加 */
+  /* aに動きが追加されたとき、その動作を何秒かけて行うかの設定 */
+  /* ease -> ゆっくり自然な感じで動く。 linear -> 最初から最後まで等速。 */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* リンクにマウスカーソルを乗せた時に少し色を濃くする */
+a:hover {
+  background-color: var(--color-accent-hover);
+
+  /* ホバー時にボタンが少し浮き上がるような動きを追加 */
+  transform: translateY(-2px);
+  /* 浮き上がった分、影も少し大きくする */
+  box-shadow: var(--shadow-lg);
+}
+
+/* -----レスポンシブデザインの設定----- */
+
+/* もし画面のサイズが768px以上なら... */
+@media (min-width: 768px) {
+  .container {
+    max-width: 500px;
+    padding: 40px;
+  }
+  h1 {
+    font-weight: 400;
+    font-size: 2.5em;
+  }
+  img {
+    max-width: 300px;
+  }
+  p {
+    font-weight: 400;
+    font-size: 1.3em;
+  }
+  h2 {
+    font-size: 1.8em;
+  }
+  li {
+    font-weight: 400;
+    font-size: 1.5em;
+  }
+  .contact-form button[type="submit"] {
+    align-self: flex-end;
+  }
+  .back-to-top {
+    display: inline-block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    padding: 20px;
+    /* ----- スクロールでTOPボタンを表示 ----- */
+    /* 初期状態ではボタンを隠す */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+  /* 表示させるときのスタイル */
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* スマホ用の設定 (今はgridだから封印)*/
+/* もし画面のサイズが768px未満なら... */
+/* @media (max-width: 768px) {
+  .likes-container {
+    flex-direction: column; /* Flexの並び順を縦方向に */
+
+/* 交差軸（横方向）の中央揃え */
+/* columnで主軸が縦方向に変わるから、主軸を中央揃えにするjustify-content: center;が横方向に効かなくなる。だからここで個別に交差軸を中央に設定する */
+/* align-items: center;
+}
+}*/
+
+/* -----likeセクションのマルチカラム化----- */
+
+.likes-container {
+  display: grid; /* Gridを有効化 */
+
+  /* gridを使う際の定型分 */
+  /* auto-fit -> コンテナの幅に収まるだけ賢くアイテムを詰め込む */
+  /* minmax(180px, 1fr) -> 各アイテムは最低でも180pxの幅を確保して、それでも余ったスペースがあれば均等(1frずつ)に分け合ってそれぞれ広がる。という意味 */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+  gap: 15px; /* カード間の最小のすき間を指定 */
+}
+.like-card {
+  background-color: var(--color-card-bg); /* カードの背景色 */
+  border-radius: 20px; /* カードの角丸 */
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  text-align: center; /* カードの中央揃え */
+}
+.like-card h3 {
+  margin-top: 0;
+  font-size: 1em;
+  color: var(--color-heading);
+}
+.like-card p {
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.6em;
+}
+
+/* -----入力フォーム周りのスタイル----- */
+
+.contact-form {
+  display: flex; /* Flexboxを有効化 */
+  flex-direction: column;
+}
+
+.form-group {
+  margin-top: 20px;
+}
+
+.contact-form label {
+  display: block; /* ラベルをブロック要素にして、入力欄を次の行に落とす */
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.contact-form input[type="text"],
+.contact-form textarea {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border);
+  /* bodyのフォントを継承させる */
+  /* フォーム要素(input,textarea,button等)は標準フォントが適用される */
+  font-family: inherit;
+
+  border-radius: 10px;
+  width: 100%;
+  font-size: 1em;
+  padding: 10px;
+  margin-top: 8px;
+  box-shadow: var(--shadow-sm);
+  /* width: 100%とpaddingを両立させるためのおまじない */
+  /* widthの100%幅+paddingの幅でフォームがコンテナを貫通するのを防ぐ */
+  box-sizing: border-box;
+}
+
+.contact-form textarea {
+  min-height: 120px; /* メッセージ欄の最低サイズ */
+  resize: vertical; /* 縦方向にのみリサイズ可能にする */
+
+  /* カウンターを配置するスペースを右下に確保する */
+  padding-bottom: 30px;
+}
+
+.contact-form button[type="submit"] {
+  display: inline-block;
+
+  background-color: var(--color-accent);
+  color: var(--color-accent-primary);
+  font-family: inherit;
+  margin-top: 10px;
+  padding: 8px 12px;
+  font-size: 1.1em;
+  font-weight: 500;
+  border-radius: 20px;
+  border: none; /* デフォルトの外枠を消す */
+  cursor: pointer; /* マウスカーソルを指の形にする */
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.contact-form button[type="submit"]:hover {
+  background-color: var(--color-accent-hover);
+
+  /* ホバー時にボタンが少し浮き上がるような動きを追加 */
+  transform: translateY(-2px);
+  /* 浮き上がった分、影も少し大きくする */
+  box-shadow: var(--shadow-lg);
+}
+
+/* twitterリンクを送信ボタンよりも目立たせなくする */
+.btn-secondary {
+  background-color: var(--color-accent-secondary-bg);
+  color: var(--color-accent-secondary-fg);
+  border: 2px solid var(--color-accent-secondary-border);
+  padding: 10px 14px;
+}
+.btn-secondary:hover {
+  background-color: var(--color-accent-secondary-hover-bg);
+  color: var(--color-accent-secondary-hover-fg);
+}
+
+/* ----- CSSアニメーションの設定 ----- */
+
+/* アニメーション前の初期状態（透明で少し下にいる） */
+.fade-in {
+  opacity: 0; /* 透明度。0 -> 完全な透明。1 -> 不透明 */
+
+  /* 30px下で待機。 transform -> 要素の形を変えたり、位置をずらしたり、回転させたりする*/
+  transform: translateY(30px);
+
+  /* 上記二つの変化の過程が何秒かけて行われるかの設定 */
+  /* ease-out -> 素早く開始・ゆっくり終了。 easeはゆっくり・加速・ゆっくり */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* 画面内に入った時に適用するクラス（不透明で元の位置に戻る） */
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----- 文字数カウンターをメッセージに埋め込む ----- */
+
+/* positionを使って要素を自由に配置できる */
+/* 新しく作った親要素（ラッパー） */
+.textarea-wrapper {
+  position: relative; /* 子要素(カウンター)の位置の基準点(原点)になる */
+}
+
+.char-counter {
+  position: absolute; /* 親要素を基準に自由な配置が可能になる */
+  bottom: 1px; /* 親要素の下から1pxの位置 */
+  right: 10px; /* 親要素の右から10pxの位置 */
+
+  font-size: 1em;
+  color: var(--color-fg);
+  opacity: 0.7; /* 少し透明にする */
+}
