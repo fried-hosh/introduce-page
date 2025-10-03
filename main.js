@@ -72,3 +72,41 @@ window.addEventListener("scroll", (event) => {
     backToTopButton.classList.remove("visible");
   }
 });
+
+// ----- モーダル関連の操作 -----
+
+const likesContainer = document.querySelector(".likes-container");
+const modal = document.getElementById("modal");
+const modalCloseBtn = document.querySelector(".modal-close-btn");
+const modalTitle = document.getElementById("modal-title");
+const modalText = document.getElementById("modal-text");
+
+// 親要素の .likes-containerにイベントリスナーを設定
+likesContainer.addEventListener("click", (event) => {
+  // クリックされた要素が.like-cardかを確認
+  const clickedCard = event.target.closest(".like-card");
+
+  if (clickedCard) {
+    // クリックされたカードのh3とpのテキストを取得
+    const title = clickedCard.querySelector("h3").textContent;
+    const text = clickedCard.querySelector("p").textContent;
+
+    // モーダルの内容を、取得したテキストで更新
+    modalTitle.textContent = title;
+    modalText.textContent = text;
+
+    // モーダルを表示
+    modal.classList.remove("is-hidden");
+  }
+});
+
+// 閉じるボタンでモーダルを非表示にする
+modalCloseBtn.addEventListener("click", () => {
+  modal.classList.add("is-hidden");
+});
+
+modal.addEventListener("click", (event) => {
+  if (event.target == modal) {
+    modal.classList.add("is-hidden");
+  }
+});
