@@ -197,67 +197,6 @@ a:hover {
   box-shadow: var(--shadow-lg);
 }
 
-/* -----レスポンシブデザインの設定----- */
-
-/* もし画面のサイズが768px以上なら... */
-@media (min-width: 768px) {
-  .container {
-    max-width: 500px;
-    padding: 40px;
-  }
-  h1 {
-    font-weight: 400;
-    font-size: 2.5em;
-  }
-  img {
-    max-width: 300px;
-  }
-  p {
-    font-weight: 400;
-    font-size: 1.3em;
-  }
-  h2 {
-    font-size: 1.8em;
-  }
-  li {
-    font-weight: 400;
-    font-size: 1.5em;
-  }
-  .contact-form button[type="submit"] {
-    align-self: flex-end;
-  }
-  .back-to-top {
-    display: inline-block;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    border-radius: 50%;
-    padding: 20px;
-    /* ----- スクロールでTOPボタンを表示 ----- */
-    /* 初期状態ではボタンを隠す */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  /* 表示させるときのスタイル */
-  .back-to-top.visible {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-/* スマホ用の設定 (今はgridだから封印)*/
-/* もし画面のサイズが768px未満なら... */
-/* @media (max-width: 768px) {
-  .likes-container {
-    flex-direction: column; /* Flexの並び順を縦方向に */
-
-/* 交差軸（横方向）の中央揃え */
-/* columnで主軸が縦方向に変わるから、主軸を中央揃えにするjustify-content: center;が横方向に効かなくなる。だからここで個別に交差軸を中央に設定する */
-/* align-items: center;
-}
-}*/
-
 /* -----likeセクションのマルチカラム化----- */
 
 .likes-container {
@@ -430,17 +369,75 @@ a:hover {
   max-width: 500px;
   position: relative;
   box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
 }
+
+/* .modal-close-btnの設定はPC用メディアクエリに記載 */
 .modal-close-btn {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 1.5em;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-fg);
+  display: none;
 }
+
 .is-hidden {
   display: none;
+}
+
+/* -----レスポンシブデザインの設定----- */
+
+/* もし画面のサイズが768px以上なら... */
+@media (min-width: 768px) {
+  .container {
+    max-width: 500px;
+    padding: 40px;
+  }
+  h1 {
+    font-weight: 400;
+    font-size: 2.5em;
+  }
+  img {
+    max-width: 300px;
+  }
+  p {
+    font-weight: 400;
+    font-size: 1.3em;
+  }
+  h2 {
+    font-size: 1.8em;
+  }
+  li {
+    font-weight: 400;
+    font-size: 1.5em;
+  }
+  .contact-form button[type="submit"] {
+    align-self: flex-end;
+  }
+  .back-to-top {
+    display: inline-block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    padding: 20px;
+    /* ----- スクロールでTOPボタンを表示 ----- */
+    /* 初期状態ではボタンを隠す */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  /* 表示させるときのスタイル */
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  /* モーダルの閉じるボタン */
+  .modal-close-btn {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5em;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-fg);
+  }
 }
