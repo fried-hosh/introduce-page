@@ -8,6 +8,7 @@
   --color-border: #d3d3d3;
   --container-border-w: 0; /* コンテナの外枠の線の幅 */
   --color-card-bg: #fff;
+  --color-error-message: #d80909;
   --color-accent: #d80909; /* aのボタン */
   --color-accent-primary: #fff; /* ボタンの文字 */
   --color-accent-hover: #d80909; /* ホバー時の色 */
@@ -30,6 +31,7 @@
     --color-border: #444;
     --container-border-w: 1px; /* コンテナの外枠の線の幅 */
     --color-card-bg: #3a3a3c;
+    --color-error-message: #d80909;
     --color-accent: #007979;
     --color-accent-primary: #fff;
     --color-accent-hover: #007979;
@@ -144,6 +146,8 @@ img {
   border-radius: 50%;
 
   margin-bottom: 32px;
+
+  border: 2px solid var(--color-accent);
 }
 
 ul {
@@ -347,7 +351,7 @@ a:hover {
   opacity: 0.7; /* 少し透明にする */
 }
 
-/* モーダル用のスタイル */
+/* ----- モーダル用のスタイル ----- */
 .modal {
   position: fixed; /* スクロールしても画面に固定され続ける */
   top: 0;
@@ -379,6 +383,14 @@ a:hover {
 
 .is-hidden {
   display: none;
+}
+
+.error-message {
+  color: var(--color-error-message);
+  font-size: 0.9em;
+  margin-top: 4px;
+  display: block; /* メッセージがない時は高さを0にするため */
+  height: 1.2em; /* メッセージ表示/非表示でレイアウトがガタつくのを防ぐ */
 }
 
 /* -----レスポンシブデザインの設定----- */
@@ -439,5 +451,15 @@ a:hover {
     border: none;
     cursor: pointer;
     color: var(--color-fg);
+  }
+}
+
+/* ----- アニメーションを非表示にしているデバイス向けのメディアクエリ ----- */
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    transition: none;
+    transform: none;
+    opacity: 1;
   }
 }
