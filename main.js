@@ -123,39 +123,8 @@ const form = document.querySelector(".contact-form");
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
-  // --- 名前のバリデーション ---
-  let isNameValid = false; // バリデーション成功フラグ
-  // 1. inputから、エラーメッセージを表示するべきspanのID名を取得
-  const nameErrorId = nameInput.getAttribute("aria-describedby");
-  // 2. 取得したID名を使って、該当するspan要素を捕まえる
-  const nameErrorElement = document.getElementById(nameErrorId);
-  // 3. spanのエラーメッセージを一旦リセット
-  nameErrorElement.textContent = "";
-
-  if (nameInput.value.trim() === "") {
-    nameErrorElement.textContent = "お名前を入力してください。";
-  } else {
-    isNameValid = true; // エラーがなければ成功フラグをtrueに
-  }
-
-  // --- メッセージのバリデーション ---
-  let isMessageValid = false;
-  const messageErrorId = messageInput.getAttribute("aria-describedby");
-  const messageErrorElement = document.getElementById(messageErrorId);
-  messageErrorElement.textContent = "";
-
-  const messageValue = messageInput.value.trim();
-  if (messageValue === "") {
-    messageErrorElement.textContent = "メッセージを入力してください。";
-  } else if (messageValue.length < 10) {
-    messageErrorElement.textContent = "10文字以上入力してください。";
-  } else {
-    isMessageValid = true;
-  }
-
-  // --- 最終チェック ---
   // もし全てのバリデーションが成功していたら...
-  if (isNameValid && isMessageValid) {
+  if (validateForm()) {
     console.log("バリデーション成功！送信処理に進みます。");
   } else return; // 失敗してたらreturnで送信を阻止
 
@@ -173,6 +142,53 @@ form.addEventListener("submit", async (event) => {
     alert("送信に失敗しました。もう一度お試しください。");
   }
 });
+
+// ↓↓↓ 関数に切り出したバリデーションの処理 ↓↓↓
+
+function validateName() {
+  // --- 名前のバリデーション ---
+  let isNameValid = false; // バリデーション成功フラグ
+  // 1. inputから、エラーメッセージを表示するべきspanのID名を取得
+  const nameErrorId = nameInput.getAttribute("aria-describedby");
+  // 2. 取得したID名を使って、該当するspan要素を捕まえる
+  const nameErrorElement = document.getElementById(nameErrorId);
+  // 3. spanのエラーメッセージを一旦リセット
+  nameErrorElement.textContent = "";
+
+  if (nameInput.value.trim() === "") {
+    nameErrorElement.textContent = "お名前を入力してください。";
+  } else {
+    isNameValid = true; // エラーがなければ成功フラグをtrueに
+
+    return isNameValid;
+  }
+}
+
+function validateMessage() {
+  // --- メッセージのバリデーション ---
+  let isMessageValid = false;
+  const messageErrorId = messageInput.getAttribute("aria-describedby");
+  const messageErrorElement = document.getElementById(messageErrorId);
+  messageErrorElement.textContent = "";
+
+  const messageValue = messageInput.value.trim();
+  if (messageValue === "") {
+    messageErrorElement.textContent = "メッセージを入力してください。";
+  } else if (messageValue.length < 10) {
+    messageErrorElement.textContent = "10文字以上入力してください。";
+  } else {
+    isMessageValid = true;
+
+    return isMessageValid;
+  }
+}
+
+function validateForm() {
+  const isNameValid = validateName();
+  const isMessageValid = validateMessage();
+
+  return isNameValid && isMessageValid;
+}
 
 // ↓↓↓ 関数に切り出したfetchの処理 ↓↓↓
 
