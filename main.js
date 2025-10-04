@@ -157,6 +157,7 @@ function validateName() {
 
   if (nameInput.value.trim() === "") {
     nameErrorElement.textContent = "お名前を入力してください。";
+    return false;
   } else {
     isNameValid = true; // エラーがなければ成功フラグをtrueに
 
@@ -174,8 +175,10 @@ function validateMessage() {
   const messageValue = messageInput.value.trim();
   if (messageValue === "") {
     messageErrorElement.textContent = "メッセージを入力してください。";
+    return false;
   } else if (messageValue.length < 10) {
     messageErrorElement.textContent = "10文字以上入力してください。";
+    return false;
   } else {
     isMessageValid = true;
 
@@ -183,6 +186,8 @@ function validateMessage() {
   }
 }
 
+// 全体のバリデーション担当
+// これなしでif (name() && message())にすると、nameがfalseのときにmessageの評価がスキップされる。
 function validateForm() {
   const isNameValid = validateName();
   const isMessageValid = validateMessage();
