@@ -172,30 +172,30 @@ form.addEventListener("submit", async (event) => {
     console.error("送信に失敗しました:", error);
     alert("送信に失敗しました。もう一度お試しください。");
   }
-
-  // ↓↓↓ 関数に切り出したfetchの処理 ↓↓↓
-
-  async function submitFormData() {
-    // 送信するデータをまとめる
-    const postData = {
-      name: nameInput.value,
-      message: messageInput.value,
-    };
-    // 時間のかかる処理の前にawaitをつけて、結果を直接変数に入れる
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json", // JSONを送る時の定型分
-      },
-      // オブジェクトをjsonに変換
-      body: JSON.stringify(postData), // 実際に送るデータ本体
-    });
-
-    if (!response.ok) {
-      throw new Error(`サーバーエラー: ${response.status}`);
-    }
-
-    // responseをjsonに変換するのも時間がかかるため、awaitで待つ
-    return response.json();
-  }
 });
+
+// ↓↓↓ 関数に切り出したfetchの処理 ↓↓↓
+
+async function submitFormData() {
+  // 送信するデータをまとめる
+  const postData = {
+    name: nameInput.value,
+    message: messageInput.value,
+  };
+  // 時間のかかる処理の前にawaitをつけて、結果を直接変数に入れる
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json", // JSONを送る時の定型分
+    },
+    // オブジェクトをjsonに変換
+    body: JSON.stringify(postData), // 実際に送るデータ本体
+  });
+
+  if (!response.ok) {
+    throw new Error(`サーバーエラー: ${response.status}`);
+  }
+
+  // responseをjsonに変換するのも時間がかかるため、awaitで待つ
+  return response.json();
+}
