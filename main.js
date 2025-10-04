@@ -162,6 +162,20 @@ form.addEventListener("submit", async (event) => {
   // ----- fetchを使ってデータを送信する -----
 
   try {
+    const responseData = await submitFormData();
+
+    // データが到着したら以下の処理が走って終わり
+    console.log("サーバーからの返信:", responseData);
+    alert("メッセージが送信されました！");
+    form.reset(); // フォームをクリア
+  } catch (error) {
+    console.error("送信に失敗しました:", error);
+    alert("送信に失敗しました。もう一度お試しください。");
+  }
+
+  // ↓↓↓ 関数に切り出したfetchの処理 ↓↓↓
+
+  async function submitFormData() {
     // 送信するデータをまとめる
     const postData = {
       name: nameInput.value,
@@ -173,6 +187,7 @@ form.addEventListener("submit", async (event) => {
       headers: {
         "Content-Type": "application/json", // JSONを送る時の定型分
       },
+      // オブジェクトをjsonに変換
       body: JSON.stringify(postData), // 実際に送るデータ本体
     });
 
@@ -180,13 +195,7 @@ form.addEventListener("submit", async (event) => {
       throw new Error(`サーバーエラー: ${response.status}`);
     }
 
-    // response.jsonも時間がかかるため、awaitで待つ
-    const data = await response.json();
-
-    console.log("サーバーからの返信:", data);
-    alert("メッセージが送信されました！");
-  } catch (error) {
-    console.error("送信に失敗しました:", error);
-    alert("送信に失敗しました。もう一度お試しください。");
+    // responseをjsonに変換するのも時間がかかるため、awaitで待つ
+    return response.json();
   }
 });
