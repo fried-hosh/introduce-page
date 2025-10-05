@@ -163,7 +163,7 @@ function validateName() {
     nameErrorElement.textContent = "お名前を入力してください。";
     return false;
   } else {
-    isNameValid = true; // エラーがなければ成功フラグをtrueに
+    isNameValid = true; // エラーがなければ成功フラグをtrueにする
 
     return isNameValid;
   }
