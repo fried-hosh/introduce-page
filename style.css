@@ -224,7 +224,8 @@ a:hover {
 }
 .like-card h3 {
   margin-top: 0;
-  font-size: 1em;
+  font-weight: 500;
+  font-size: 1.2em;
   color: var(--color-heading);
 }
 .like-card p {
