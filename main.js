@@ -82,20 +82,24 @@ const modal = document.getElementById("modal");
 const modalCloseBtn = document.querySelector(".modal-close-btn");
 const modalTitle = document.getElementById("modal-title");
 const modalText = document.getElementById("modal-text");
+const modalImage = document.getElementById("modal-image");
 
 // 親要素の .likes-containerにイベントリスナーを設定
 likesContainer.addEventListener("click", (event) => {
-  // クリックされた要素が.like-cardかを確認
-  const clickedCard = event.target.closest(".like-card");
+  // クリックされた要素が.details-btnかどうかを確認
+  const clickedButton = event.target.closest(".details-btn");
 
-  if (clickedCard) {
-    // クリックされたカードのh3とpのテキストを取得
-    const title = clickedCard.querySelector("h3").textContent;
-    const text = clickedCard.querySelector("p").textContent;
+  if (clickedButton) {
+    // クリックされたボタンのdata属性から情報を取得
+    const title = clickedButton.dataset.title;
+    const text = clickedButton.dataset.text;
+    const image = clickedButton.dataset.image;
 
-    // モーダルの内容を、取得したテキストで更新
+    // モーダルの内容を、取得した情報で更新
     modalTitle.textContent = title;
     modalText.textContent = text;
+    modalImage.src = image;
+    modalImage.alt = title; // 一応altも書いとく
 
     // モーダルを表示
     modal.classList.remove("is-hidden");
@@ -109,7 +113,7 @@ modalCloseBtn.addEventListener("click", () => {
 
 // モーダルをクリックしても窓を消せるようにする
 modal.addEventListener("click", (event) => {
-  if (event.target == modal) {
+  if (event.target === modal) {
     modal.classList.add("is-hidden");
   }
 });
@@ -176,8 +180,8 @@ function validateMessage() {
   if (messageValue === "") {
     messageErrorElement.textContent = "メッセージを入力してください。";
     return false;
-  } else if (messageValue.length < 10) {
-    messageErrorElement.textContent = "10文字以上入力してください。";
+  } else if (messageValue.length < 5) {
+    messageErrorElement.textContent = "5文字以上入力してください。";
     return false;
   } else {
     isMessageValid = true;

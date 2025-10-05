@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- 検索エンジンやSNSシェアで表示されるページの要約文 -->
-    <meta name="description" content="ずんだもんの自己紹介ページです。趣味や学習中の技術についてまとめています。" />
+    <meta name="description" content="自己紹介ページです。趣味や学習中の技術についてまとめています。" />
 
-    <title>ずんだもん</title>
-    <link rel="icon" href="images/IMG_0466.jpeg" type="image/png" />
+    <title>introduce</title>
+    <link rel="icon" href="images/fabicon_cake.jpeg" type="image/png" />
     <link rel="stylesheet" href="style.css" />
     <script src="main.js" defer></script>
 
@@ -26,8 +26,11 @@
 
     <main class="container">
       <header>
-        <h1>ずんだもん</h1>
-        <img src="images/IMG_0457.jpeg" alt="ずんだもん" />
+        <h1>Hosh</h1>
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="images/natsu_n.jpeg" />
+          <img src="images/natsu_d.jpeg" alt="メインアイコン" />
+        </picture>
 
         <p>ここは私の自己紹介ページです。<br />現在JavaScriptを勉強しています。</p>
       </header>
@@ -38,18 +41,22 @@
           <div class="like-card fade-in">
             <h3>スピンバイク</h3>
             <p>毎日600kcal消費を目安に取り組んでいます。</p>
+            <button class="details-btn" data-title="スピンバイク" data-text="使用機材: FITBOX LITE&#10;乗り始めて以降、約14kgの減量に成功しています。" data-image="images/weight.jpeg">See Details</button>
           </div>
           <div class="like-card fade-in">
             <h3>筋トレ</h3>
             <p>筋肉量を維持するために定期的な筋トレを行っています。</p>
-          </div>
-          <div class="like-card fade-in">
-            <h3>ごはん</h3>
-            <p>高タンパク低脂質な食事を心がけています。</p>
+            <button class="details-btn" data-title="筋トレ" data-text="（画像はイメージ）&#10;チューブとアブローラーを使用しています。&#10;メニュー:&#10;チューブチェストプレス&#10;チューブベントオーバーロー&#10;膝コロ&#10;スクワット" data-image="images/natsu_muscle.jpeg">See Details</button>
           </div>
           <div class="like-card fade-in">
             <h3>料理</h3>
-            <p>鶏胸肉を使ったレシピが好きです。</p>
+            <p>高タンパク低脂質な食事を心がけています。</p>
+            <button class="details-btn" data-title="料理" data-text="好きな料理は豚バラたっぷりのゴーヤーチャンプルー。" data-image="images/bitter_melon.JPG">See Details</button>
+          </div>
+          <div class="like-card fade-in">
+            <h3>ゲーム</h3>
+            <p>積みゲーの山が消化し切れなくて困っています。</p>
+            <button class="details-btn" data-title="ゲーム" data-text="プラットフォーム: 主にPC(Steam)&#10;イチオシのタイトル:&#10;ELDEN RING&#10;Hollow Knight&#10;Cyberpunk 2077&#10;Persona 5 Royal" data-image="images/elden.png">See Details</button>
           </div>
         </div>
       </section>
@@ -93,6 +100,7 @@
       <div class="modal-content">
         <button class="modal-close-btn">&times;</button>
         <h3 id="modal-title"></h3>
+        <img id="modal-image" src="" alt="詳細画像" class="modal-image-style" />
         <p id="modal-text"></p>
       </div>
     </div>

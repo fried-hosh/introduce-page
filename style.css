@@ -214,6 +214,8 @@ a:hover {
   gap: 15px; /* カード間の最小のすき間を指定 */
 }
 .like-card {
+  display: flex;
+  flex-direction: column;
   background-color: var(--color-card-bg); /* カードの背景色 */
   border-radius: 20px; /* カードの角丸 */
   padding: 20px;
@@ -226,6 +228,7 @@ a:hover {
   color: var(--color-heading);
 }
 .like-card p {
+  flex-grow: 1; /* 余白スペースをpが占有する -> 押し下げられたSee Detailsボタンがカードの最下段で綺麗に揃う。 */
   font-weight: 400;
   font-size: 1em;
   line-height: 1.6em;
@@ -369,7 +372,7 @@ a:hover {
   text-align: center;
   padding: 30px;
   border-radius: 20px;
-  width: 40%;
+  width: 70%;
   max-width: 500px;
   position: relative;
   box-shadow: var(--shadow-lg);
@@ -377,8 +380,17 @@ a:hover {
 }
 
 /* .modal-close-btnの設定はPC用メディアクエリに記載 */
+/* モーダルの閉じるボタン */
 .modal-close-btn {
-  display: none;
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-fg);
 }
 
 .is-hidden {
@@ -391,6 +403,36 @@ a:hover {
   margin-top: 4px;
   display: block; /* メッセージがない時は高さを0にするため */
   height: 1.2em; /* メッセージ表示/非表示でレイアウトがガタつくのを防ぐ */
+}
+
+/* ----- See Detailsボタンのスタイル ----- */
+.details-btn {
+  background-color: transparent;
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
+  border-radius: 20px;
+  padding: 8px 16px;
+  margin-top: 16px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+.details-btn:hover {
+  background-color: var(--color-accent);
+  color: var(--color-accent-primary);
+  transform: translateY(-2px);
+}
+/* モーダル内の画像のスタイル */
+.modal-image-style {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+/* &#10; で改行できるようにする */
+#modal-text {
+  white-space: pre-line;
 }
 
 /* -----レスポンシブデザインの設定----- */
@@ -439,18 +481,6 @@ a:hover {
   .back-to-top.visible {
     opacity: 1;
     visibility: visible;
-  }
-  /* モーダルの閉じるボタン */
-  .modal-close-btn {
-    display: inline-block;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.5em;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--color-fg);
   }
 }
 
