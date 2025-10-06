@@ -483,6 +483,23 @@ a:hover {
     opacity: 1;
     visibility: visible;
   }
+  /* ----- オブザーバーのスクロール検知ポイントの位置調整 ----- */
+
+  #scroll-trigger-point {
+    /* absoluteがないとtopが効かなくなる */
+    position: absolute;
+    top: 300px;
+
+    /* 監視対象として認識させるための最小の高さ */
+    /* absoluteにすると内側の要素のサイズに合わせて縮む。<div></div>には何も要素が入ってないから、このままだと0pxになる */
+    /* 設定せずに0pxにしても一応機能した  */
+    height: 1px;
+    width: 100%;
+
+    /* 操作の邪魔にならないようにする（今回はあまり関係ない） */
+    pointer-events: none;
+    visibility: hidden;
+  }
 }
 
 /* ----- アニメーションを非表示にしているデバイス向けのメディアクエリ ----- */
