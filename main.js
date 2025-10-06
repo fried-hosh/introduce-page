@@ -13,7 +13,7 @@ const fadeinTargets = document.querySelectorAll(".fade-in");
 
 // 画面に入ったかどうかを判定するIntersection Observerを作成
 // "visible"とfadeinTargets以外は全部定型文
-const observer = new IntersectionObserver((entries) => {
+const fadeinObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     // 画面内に入ったら
     if (entry.isIntersecting) {
@@ -25,7 +25,7 @@ const observer = new IntersectionObserver((entries) => {
 
 // 各要素の監視を開始
 fadeinTargets.forEach((target) => {
-  observer.observe(target);
+  fadeinObserver.observe(target);
 });
 
 // ----- 文字数カウンターの設定 -----
@@ -63,17 +63,27 @@ form.addEventListener("submit", (event) => {
 // ----- スクロールでTOPボタンを表示 -----
 
 const backToTopButton = document.querySelector(".back-to-top");
+const triggerPoint = document.getElementById("scroll-trigger-point");
 
-// スクロールイベントを監視
-window.addEventListener("scroll", (event) => {
-  // ページの上から300px以上スクロールされたら
-  if (window.scrollY >= 300) {
-    backToTopButton.classList.add("visible");
-  } else {
-    // 300px未満ならvisibleクラスを削除してボタンを隠す
-    backToTopButton.classList.remove("visible");
-  }
-});
+const scrollTopObserver = new IntersectionObserver(
+  (entries) => {
+    // entriesは配列で渡されるけど、今回は監視対象が1つのTOPボタンのみだから.forEachせずに最初の要素[0]だけ見る
+    const entry = entries[0];
+
+    // !isIntersecting = 監視対象が画面外に出た、という意味
+    // つまり、300px地点にある目印が画面の上端から見えなくなったタイミングでボタンを表示する
+    if (!entry.isIntersecting) {
+      backToTopButton.classList.add("visible");
+    } else {
+      // 監視対象が画面内にある = スクロールが300px未満
+      backToTopButton.classList.remove("visible");
+    }
+  },
+  { threshold: [0] } // オプション設定。ターゲットが1pxでも見え始めたら発火する(または完全に見えなくなったら発火)という意味。 1だと100%見えたら発火、0.5だとターゲットの半分が見えたら発火、という感じ。 デフォルトは0
+);
+
+// マーカー要素の監視を開始
+scrollTopObserver.observe(triggerPoint);
 
 // ----- モーダル関連の操作 -----
 
