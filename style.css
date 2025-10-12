@@ -304,6 +304,10 @@ a:hover {
   /* 浮き上がった分、影も少し大きくする */
   box-shadow: var(--shadow-lg);
 }
+.contact-form button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
 
 /* twitterリンクを送信ボタンよりも目立たせなくする */
 .btn-secondary {
