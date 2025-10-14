@@ -46,6 +46,12 @@
   }
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   /* ページの特定の箇所に飛ぶときに画面移動がスムーズになるだけ */
   scroll-behavior: smooth;
@@ -83,7 +89,7 @@ body {
 
 .container {
   /* ブロックの大きさを300pxに制限 */
-  max-width: 300px;
+  max-width: 350px;
 
   /* コンテナ自体をページの中央に配置するためのおまじない */
   margin: 0 auto;
@@ -267,9 +273,6 @@ a:hover {
   padding: 10px;
   margin-top: 8px;
   box-shadow: var(--shadow-sm);
-  /* width: 100%とpaddingを両立させるためのおまじない */
-  /* widthの100%幅+paddingの幅でフォームがコンテナを貫通するのを防ぐ */
-  box-sizing: border-box;
 }
 
 .contact-form textarea {
@@ -377,7 +380,7 @@ a:hover {
   text-align: center;
   padding: 30px;
   border-radius: 20px;
-  width: 70%;
+  width: 85%;
   max-width: 500px;
   position: relative;
   box-shadow: var(--shadow-lg);
@@ -445,7 +448,7 @@ a:hover {
 /* もし画面のサイズが768px以上なら... */
 @media (min-width: 768px) {
   .container {
-    max-width: 500px;
+    max-width: 600px;
     padding: 40px;
   }
   h1 {
@@ -465,6 +468,10 @@ a:hover {
   li {
     font-weight: 400;
     font-size: 1.5em;
+  }
+  .modal-content {
+    width: 90%;
+    max-width: 600px;
   }
   .contact-form button[type="submit"] {
     align-self: flex-end;
